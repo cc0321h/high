@@ -1,2 +1,26 @@
-package org.explore.high.config;public class MinioClientConfiguration {
+package org.explore.high.config;
+
+import org.explore.high.properties.StorageProperties;
+import org.explore.high.utils.MinioUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Configuration
+public class MinioClientConfiguration {
+
+    @Bean
+    public MinioUtil minioUtil(@Autowired StorageProperties storageProperties) {
+        log.info("初始化MinioClient");
+        log.info(storageProperties.getUrl());
+        return new MinioUtil(storageProperties.getUrl(),
+                storageProperties.getAccessKey(),
+                storageProperties.getSecretKey(),
+                storageProperties.getBucketName());
+    }
+
 }

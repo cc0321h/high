@@ -1,0 +1,22 @@
+high:
+  deepseek:
+    api-key: 123456
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    host: 172.26.179.90
+    port: 3306
+    database: explore_high
+    username: root
+    password: root
+  redis:
+    host: 172.26.179.90
+    port: 6379
+    password: "redis"
+  s3:
+    url: http://172.26.179.90:9000
+    access-key: ocBIf71zRN2DzaOC5AVI
+    secret-key: doqHBh4JSFxl81dtCB0jRqqAnTvrDNvsZ2j7FhWu
+    bucketname: ocean
+  jwt:
+    admin-secret-key: explore_high_admin
+    user-secret-key: explore_high_user

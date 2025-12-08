@@ -1,2 +1,35 @@
-spring.application.name=high
-spring.ai.deepseek.api-key=${deepseek.api.key}
+server:
+  port: 8081
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: high
+  ai:
+    deepseek:
+      api-key: ${high.deepseek.api-key:1234567890}
+  datasource:
+    driver-class-name: ${high.datasource.driver-class-name}
+    url: jdbc:mysql://${high.datasource.host}:${high.datasource.port}/${high.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    username: ${high.datasource.username}
+    password: ${high.datasource.password}
+  data:
+    redis:
+      host: ${high.redis.host}
+      port: ${high.redis.port}
+      password: ${high.redis.password}
+
+high:
+  jwt:
+    admin-secret-key: ${high.jwt.admin-secret-key}
+    admin-ttl: 7200000
+    admin-token-name: token
+    user-secret-key: ${high.jwt.user-secret-key}
+    user-ttl: 7200000
+    user-token-name: authentication
+  s3:
+    url: ${high.s3.url}
+    access-key: ${high.s3.access-key}
+    secret-key: ${high.s3.secret-key}
+    bucketname: ${high.s3.bucketname}
