@@ -1,0 +1,2 @@
+spring.application.name=high
+spring.ai.deepseek.api-key=${deepseek.api.key}
