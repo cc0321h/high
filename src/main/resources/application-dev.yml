@@ -18,5 +18,5 @@ high:
     secret-key: doqHBh4JSFxl81dtCB0jRqqAnTvrDNvsZ2j7FhWu
     bucketname: ocean
   jwt:
-    admin-secret-key: explore_high_admin
-    user-secret-key: explore_high_user
+    admin-secret-key: explore_high_admin_secret_key_CC0321
+    user-secret-key: explore_high_user_secret_key_CC0321

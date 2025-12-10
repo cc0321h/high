@@ -10,7 +10,6 @@ import org.explore.high.utils.JwtUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -25,9 +24,6 @@ public class UserServiceImpl implements UserService {
     
     @Autowired
     private UserMapper userMapper;
-    
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
     
     @Value("${high.jwt.user-secret-key}")
     private String userSecretKey;
@@ -54,9 +50,6 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         BeanUtils.copyProperties(userRegisterDTO, user);
         
-        // 密码加密
-        user.setPassword(bCryptPasswordEncoder.encode(userRegisterDTO.getPassword()));
-        
         // 设置默认角色和状态
         user.setRole("user");
         user.setStatus("active");
@@ -81,7 +74,7 @@ public class UserServiceImpl implements UserService {
         Assert.isTrue("active".equals(user.getStatus()), "用户已被禁用");
         
         // 验证密码
-        boolean passwordMatch = bCryptPasswordEncoder.matches(userLoginDTO.getPassword(), user.getPassword());
+        boolean passwordMatch = userLoginDTO.getPassword().equals(user.getPassword());
         Assert.isTrue(passwordMatch, "用户名或密码错误");
         
         // 生成JWT令牌
