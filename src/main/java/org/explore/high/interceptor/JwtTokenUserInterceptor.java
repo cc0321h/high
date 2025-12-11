@@ -11,6 +11,7 @@ import org.explore.high.utils.JwtUtil;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -47,7 +48,12 @@ public class JwtTokenUserInterceptor extends OncePerRequestFilter {
             return;
         }
 
-        //3、校验令牌
+        //3、处理令牌前缀，如果有Bearer前缀则移除
+        if (token.startsWith("Bearer ")) {
+            token = token.substring(7);
+        }
+
+        //4、校验令牌
         try {
             log.info("JWT校验:{}", token);
             Claims claims = JwtUtil.parseJWT(jwtProperties.getUserSecretKey(), token);
@@ -57,7 +63,12 @@ public class JwtTokenUserInterceptor extends OncePerRequestFilter {
             BaseContext.setCurrentId(userId.longValue());
             
             //4、设置认证信息到上下文
-            SecurityContextHolder.getContext().setAuthentication(null);
+            // 创建一个UsernamePasswordAuthenticationToken对象，并设置到SecurityContext中
+            // 这里可以根据需要创建自定义的Authentication对象
+            UsernamePasswordAuthenticationToken authentication = 
+                new UsernamePasswordAuthenticationToken(
+                    userId, null, java.util.Collections.emptyList());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
             
             //5、通过，继续执行过滤器链
             filterChain.doFilter(request, response);

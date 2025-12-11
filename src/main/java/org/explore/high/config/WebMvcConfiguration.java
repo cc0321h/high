@@ -1,6 +1,5 @@
 package org.explore.high.config;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
@@ -14,4 +13,5 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
     public WebMvcConfiguration() {
         log.info("开始初始化WebMvc配置...");
     }
+
 }

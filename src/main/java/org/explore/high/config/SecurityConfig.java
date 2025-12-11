@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -41,9 +40,9 @@ public class SecurityConfig {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             // 配置URL访问权限
             .authorizeHttpRequests(authorize -> authorize
-                // 允许登录和注册接口匿名访问
+                // 只允许登录和注册接口匿名访问
                 .requestMatchers("/api/users/login", "/api/users/register").permitAll()
-                // 其他所有请求需要认证
+                // 其他所有请求需要认证，包括上传接口
                 .anyRequest().authenticated()
             )
             // 添加JWT过滤器
