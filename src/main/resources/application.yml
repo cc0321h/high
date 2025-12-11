@@ -1,5 +1,9 @@
 server:
   port: 8081
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
 
 spring:
   profiles:
@@ -20,6 +24,10 @@ spring:
       port: ${high.redis.port}
       password: ${high.redis.password}
 
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
 high:
   jwt:
     admin-secret-key: ${high.jwt.admin-secret-key}
@@ -27,7 +35,7 @@ high:
     admin-token-name: token
     user-secret-key: ${high.jwt.user-secret-key}
     user-ttl: 7200000
-    user-token-name: authentication
+    user-token-name: token
   s3:
     url: ${high.s3.url}
     access-key: ${high.s3.access-key}

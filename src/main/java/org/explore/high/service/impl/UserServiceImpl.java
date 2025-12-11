@@ -58,8 +58,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         BeanUtils.copyProperties(userRegisterDTO, user);
         
-        // 设置默认角色和状态
-        user.setRole("user");
+        // 设置默认状态
         user.setStatus("active");
         
         // 插入用户信息

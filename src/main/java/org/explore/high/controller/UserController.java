@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.explore.high.result.Result;
 
 /**
  * 用户控制器
@@ -28,12 +29,12 @@ public class UserController {
      * @return 注册结果
      */
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody UserRegisterDTO userRegisterDTO) {
+    public Result<String> register(@RequestBody UserRegisterDTO userRegisterDTO) {
         boolean success = userService.register(userRegisterDTO);
         if (success) {
-            return ResponseEntity.ok("注册成功");
+            return Result.success("注册成功");
         } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("注册失败");
+            return Result.error("注册失败");
         }
     }
     
@@ -43,8 +44,8 @@ public class UserController {
      * @return 登录结果，包含用户信息和JWT令牌
      */
     @PostMapping("/login")
-    public ResponseEntity<UserLoginResponseDTO> login(@RequestBody UserLoginDTO userLoginDTO) {
+    public Result<UserLoginResponseDTO> login(@RequestBody UserLoginDTO userLoginDTO) {
         UserLoginResponseDTO responseDTO = userService.login(userLoginDTO);
-        return ResponseEntity.ok(responseDTO);
+        return Result.success(responseDTO);
     }
 }

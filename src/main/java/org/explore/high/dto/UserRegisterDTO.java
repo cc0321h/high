@@ -21,4 +21,9 @@ public class UserRegisterDTO {
      * 密码
      */
     private String password;
+
+    /**
+     * 角色
+     */
+    private String role;
 }
