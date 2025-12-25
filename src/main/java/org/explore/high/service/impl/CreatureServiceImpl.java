@@ -70,7 +70,16 @@ public class CreatureServiceImpl implements CreatureService {
     @Override
     public boolean deleteCreature(Integer id) {
         int rows = creatureMapper.deleteById(id);
-        
         return rows > 0;
+    }
+    
+    /**
+     * 根据ID查询生物
+     * @param id 生物ID
+     * @return 生物信息
+     */
+    @Override
+    public Creature getCreatureById(Integer id) {
+        return creatureMapper.selectById(id);
     }
 }

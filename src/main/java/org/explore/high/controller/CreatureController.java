@@ -116,4 +116,23 @@ public class CreatureController {
             return Result.error("生物删除失败");
         }
     }
+    
+    /**
+     * 根据ID查询单个生物
+     * @param id 生物ID
+     * @return 生物信息
+     */
+    @GetMapping({"/creatures/{id}", "/creature/{id}"})
+    public Result<Creature> getCreatureById(@PathVariable Integer id) {
+        // 添加日志
+        log.info("根据ID查询生物，ID：{}", id);
+        
+        // 查询生物
+        Creature creature = creatureService.getCreatureById(id);
+        if (creature != null) {
+            return Result.success(creature);
+        } else {
+            return Result.error("生物不存在");
+        }
+    }
 }

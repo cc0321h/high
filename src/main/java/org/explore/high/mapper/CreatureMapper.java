@@ -56,4 +56,12 @@ public interface CreatureMapper {
      */
     @Delete("DELETE FROM creature WHERE id = #{id}")
     int deleteById(Integer id);
+    
+    /**
+     * 根据ID查询生物
+     * @param id 生物ID
+     * @return 生物信息
+     */
+    @Select("SELECT * FROM creature WHERE id = #{id}")
+    Creature selectById(Integer id);
 }

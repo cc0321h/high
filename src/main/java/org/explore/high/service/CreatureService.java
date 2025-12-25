@@ -37,4 +37,11 @@ public interface CreatureService {
      * @return 删除是否成功
      */
     boolean deleteCreature(Integer id);
+    
+    /**
+     * 根据ID查询生物
+     * @param id 生物ID
+     * @return 生物信息
+     */
+    Creature getCreatureById(Integer id);
 }
